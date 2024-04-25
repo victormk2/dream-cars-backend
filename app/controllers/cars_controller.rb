@@ -8,17 +8,14 @@ class CarsController < ApplicationController
   end
 
   def show
-    render json: @car
+    render json: {car: serialized_car}
   end
 
   def create
     @car = Car.new(car_params)
 
     if @car.save
-      if(photo_params[:image])
-        @car.photo.attach(photo_params[:image])
-      end
-
+      handle_image
       render json: @car, status: :created
     else
       render json: @car.errors, status: :unprocessable_entity
@@ -27,10 +24,7 @@ class CarsController < ApplicationController
 
   def update
     if @car.update(car_params)
-      if(photo_params[:image])
-        @car.photo.attach(photo_params[:image])
-      end
-
+      handle_image
       render json: @car
     else
       render json: @car.errors, status: :unprocessable_entity
@@ -51,6 +45,7 @@ class CarsController < ApplicationController
     end
 
     def photo_params
+      params[:image] = nil if params[:image] == "null"
       params.permit(:image)
     end
 
@@ -59,5 +54,22 @@ class CarsController < ApplicationController
         @cars,
         each_serializer: Cars::IndexSerializer
       )
+    end
+
+    def serialized_car
+      ActiveModelSerializers::SerializableResource.new(
+        @car,
+        serializer: Cars::IndexSerializer
+      )
+    end
+
+    def handle_image
+      if(!photo_params[:image].nil?)
+        @car.photo.attach(photo_params[:image])
+      end
+
+      if(photo_params[:image].nil? && @car.photo.attached?)
+        @car.photo.purge
+      end
     end
 end
