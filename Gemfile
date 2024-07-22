@@ -50,3 +50,5 @@ gem 'active_model_serializers'
 gem "image_processing", ">= 1.2"
 
 gem 'rspec-rails'
+
+gem 'rubocop-rails'
