@@ -253,6 +253,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activestorage
   bootsnap
   debug
   image_processing (>= 1.2)
