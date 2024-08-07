@@ -14,7 +14,7 @@ class BrandsController < ApplicationController
     @brand = Brand.new(brand_params)
 
     if @brand.save
-      render json: { brand: serialized_brand, status: :created }
+      render json: { brand: serialized_brand }, status: :created
     else
       render json: @brand.errors, status: :unprocessable_entity
     end
@@ -43,7 +43,7 @@ class BrandsController < ApplicationController
   end
 
   def brand_params
-    params.permit(:name, :foundation_year, :country)
+    params.require(:brand).permit(:name, :foundation_year, :country)
   end
 
   def serialized_brands

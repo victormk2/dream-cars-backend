@@ -11,9 +11,4 @@ class Brand < ApplicationRecord
   # Validations
   def validate
   end
-
-  # Methods
-  def destroy
-    brand.update(active: false)
-  end
 end
