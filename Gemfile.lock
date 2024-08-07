@@ -197,6 +197,10 @@ GEM
       io-console (~> 0.5)
     rexml (3.3.2)
       strscan
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.0)
@@ -253,7 +257,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  activestorage
   bootsnap
   debug
   image_processing (>= 1.2)
@@ -261,6 +264,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rack-cors
   rails (~> 7.1.3, >= 7.1.3.2)
+  rspec
   rspec-rails
   rubocop-rails
   tzinfo-data

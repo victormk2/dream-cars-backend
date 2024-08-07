@@ -51,4 +51,6 @@ gem 'rack-cors'
 
 gem 'rspec-rails'
 
+gem 'rspec'
+
 gem 'rubocop-rails'

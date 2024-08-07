@@ -14,4 +14,8 @@ class Car < ApplicationRecord
 
     url_for(photo)
   end
+
+  def set_brand(brand_id)
+    self.brand = Brand.find(brand_id)
+  end
 end

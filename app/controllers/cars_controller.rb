@@ -16,9 +16,9 @@ class CarsController < ApplicationController
 
     if @car.save
       handle_image
-      render json: { car: serialized_car, status: :created }
+      render json: { car: serialized_car }, status: :created
     else
-      render json: @car.errors, status: :unprocessable_entity
+      render json: { errors: @car.errors }, status: :unprocessable_entity
     end
   end
 
@@ -42,12 +42,12 @@ class CarsController < ApplicationController
   end
 
   def car_params
-    params.permit(:model, :year)
+    params.require(:car).permit(:model, :year, :brand_id)
   end
 
   def photo_params
-    params[:image] = nil if params[:image] == 'null'
-    params.permit(:image)
+    params[:car][:image] = nil if params[:car][:image] == 'null'
+    params.require(:car).permit(:image)
   end
 
   def serialized_cars

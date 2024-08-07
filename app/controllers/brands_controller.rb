@@ -3,6 +3,7 @@ class BrandsController < ApplicationController
 
   def index
     @brands = Brand.all
+    render json: { brands: serialized_brands }
   end
 
   def show
@@ -43,6 +44,13 @@ class BrandsController < ApplicationController
 
   def brand_params
     params.permit(:name, :foundation_year, :country)
+  end
+
+  def serialized_brands
+    ActiveModelSerializers::SerializableResource.new(
+      @brands,
+      each_serializer: Brands::BrandSerializer
+    )
   end
 
   def serialized_brand
