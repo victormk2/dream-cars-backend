@@ -5,6 +5,7 @@ class CreateBrands < ActiveRecord::Migration[7.1]
       t.integer :foundation_year
       t.string :country
       t.boolean :active, default: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

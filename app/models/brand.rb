@@ -9,6 +9,16 @@ class Brand < ApplicationRecord
   has_many :cars
 
   # Validations
-  def validate
+  validates :name, presence: true, uniqueness: true
+  validates :foundation_year, presence: true
+
+  validate :validate_foundation_year
+
+  def destroy
+    update(deleted_at: Time.now, active: false)
+  end
+
+  def validate_foundation_year
+    errors.add(:foundation_year, 'must be a valid year') if foundation_year < 1900 || foundation_year > Time.now.year
   end
 end

@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_141339) do
     t.integer "foundation_year"
     t.string "country"
     t.boolean "active", default: true
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,6 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_141339) do
   create_table "cars", force: :cascade do |t|
     t.string "model"
     t.integer "year"
+    t.boolean "active", default: true
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "brand_id"

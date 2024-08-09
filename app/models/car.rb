@@ -15,6 +15,10 @@ class Car < ApplicationRecord
     url_for(photo)
   end
 
+  def destroy
+    update(deleted_at: Time.now, active: false)
+  end
+
   def set_brand(brand_id)
     self.brand = Brand.find(brand_id)
   end
