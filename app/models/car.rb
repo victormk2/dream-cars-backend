@@ -5,6 +5,7 @@ class Car < ApplicationRecord
 
   # Relationships
   belongs_to :brand
+  belongs_to :engine, optional: true
 
   def validate
   end
